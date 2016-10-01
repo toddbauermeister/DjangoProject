@@ -13,6 +13,7 @@ class Package(models.Model):
     id_required = models.BooleanField(default=True)
     client = models.ForeignKey(Client, default=1)
 
+
 class WarehouseManager():
     branch = models.OneToOneField(Branch, default=1)
 
