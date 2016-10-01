@@ -8,7 +8,8 @@ class PackageForm(forms.ModelForm):
 
     class Meta:
         model = Package
-        fields = ['', 'book_title', 'book_genre', 'book_cover']
+        fields = ['reference_number', 'volumetric_weight', 'client_address,'
+                  'client_city', 'receiver_address', 'receiver_city']
 
 
 class UserForm(forms.ModelForm):
@@ -17,3 +18,4 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'password']
+
