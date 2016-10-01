@@ -45,7 +45,7 @@ class Package(models.Model):
 
 class Driver(models.Model):
 
-    package = models.ForeignKey(Package, on_delete= models.CASCADE)
+    package = models.ForeignKey(Package, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     license_number = models.CharField(max_length=50)
