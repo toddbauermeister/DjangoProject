@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.auth.models import Client
-from .models Client, Branch, Package, WarehouseManager, Driver
+from django.contrib.auth.models import User
+
+from .models import  User, Branch, Package, Driver
 
 
 class PackageForm(forms.ModelForm):
@@ -10,9 +11,9 @@ class PackageForm(forms.ModelForm):
         fields = ['', 'book_title', 'book_genre', 'book_cover']
 
 
-class ClientForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
-        model = Client
-        fields = ['username', 'email', 'password']
+        model = User
+        fields = ['username', 'password']
