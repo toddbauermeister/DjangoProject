@@ -25,10 +25,23 @@ class Package(models.Model):
     status = models.CharField(max_length=50)
     volumetric_weight = models.DecimalField(max_digits=10, decimal_places=2)
     destination = models.CharField(max_length=50)
-    city = models.CharField(max_length=50)
+    destination_city = models.CharField(max_length=50)
     id_required = models.BooleanField(default=True)
     client = models.ForeignKey(Client, default=1)
     driver = models.ForeignKey(Client, default=None)
+
+    def get_statuses(self):
+        statuses = [
+            'Cancelled',
+            'Collected',
+            'Out For Delivery',
+            'Delivered',
+            'Failed',
+            'Delayed',
+            'Misrouted',
+            'Lost',
+            'Damaged'
+        ]
 
     def __str__(self):
         return "Package " + self.reference_number
@@ -39,7 +52,6 @@ class Driver(models.Model):
     surname = models.CharField(max_length=50)
     license_number = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
-    warehouse_manager = models.ForeignKey(WarehouseManager, default=1)
 
     def __str__(self):
         return self.name + " " + self.surname
