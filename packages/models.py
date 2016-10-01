@@ -21,6 +21,7 @@ class Package(models.Model):
     receiver_address = models.CharField(max_length=50)
     receiver_city = models.CharField(max_length=50)
     id_required = models.BooleanField(default=True)
+    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
 
 
     def get_statuses(self):
@@ -43,6 +44,8 @@ class Package(models.Model):
 
 
 class Driver(models.Model):
+
+    package = models.ForeignKey(Package, on_delete= models.CASCADE)
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     license_number = models.CharField(max_length=50)
@@ -50,7 +53,3 @@ class Driver(models.Model):
 
     def __str__(self):
         return self.name + " " + self.surname
-
-
-
-
