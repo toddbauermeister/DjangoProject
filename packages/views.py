@@ -19,7 +19,7 @@ def create_package(request):
         form = PackageForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             package = form.save(commit=False)
-            package.user = request.client
+            package.user = request.user
 
 
 
