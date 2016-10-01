@@ -48,7 +48,7 @@ class Package(models.Model):
     receiver_address = models.CharField(max_length=50)
     receiver_city = models.CharField(max_length=50)
     id_required = models.BooleanField(default=True)
-    driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
+
 
 
     def get_statuses(self):
