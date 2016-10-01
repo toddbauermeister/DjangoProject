@@ -23,6 +23,7 @@ class Branch(models.Model):
 class Package(models.Model):
     reference_number = models.CharField(max_length=10)
     receiver_name = models.CharField(max_length=50)
+    receiver_surname = models.CharField(max_length=50)
     status = models.CharField(max_length=50)
     volumetric_weight = models.DecimalField(max_digits=10, decimal_places=2)
     destination = models.CharField(max_length=50)
