@@ -6,6 +6,33 @@ class Branch(models.Model):
     name = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
 
+    def get_branch_offices(self):
+        satellite_offices = [
+            'Swellendam',
+            'Observatory',
+            'Kloof',
+            'Hillcrest'
+            'Hatfield',
+            'Sunnyside',
+            'Parktown',
+            'Sandton'
+        ]
+
+        return satellite_offices
+
+    def get_satellite_offices(self):
+        satellite_offices = [
+            'Cape Town',
+            'Durban',
+            'Pretoria',
+            'Johannesburg'
+        ]
+
+        return satellite_offices
+
+    def get_package_location_prefix(self):
+        prefixes = ['Arrived At', 'Left']
+
     def __str__(self):
         return self.name + " - " + self.city
 
@@ -45,7 +72,7 @@ class Package(models.Model):
 
 class Driver(models.Model):
 
-    package = models.ForeignKey(Package, on_delete= models.CASCADE)
+    package = models.ForeignKey(Package, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     license_number = models.CharField(max_length=50)
