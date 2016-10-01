@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from .forms import PackageForm, UserForm
-from .models import User, Branch, Package, WarehouseManager, Driver
+from .models import User, Branch, Package, Driver
 
 
 def mypacks(request):
@@ -19,7 +19,7 @@ def create_package(request):
         form = PackageForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             package = form.save(commit=False)
-            package.user = request.client
+            package.user = request.user
 
 
 def index(request):
