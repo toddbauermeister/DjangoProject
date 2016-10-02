@@ -18,6 +18,12 @@ def create_package(request):
             package.user = request.client
 
 
+            return render(request, 'lms/detail.html', {'package': package})
+        context = {
+                "form": form,
+         }
+        return render(request, 'lms/create_book.html', context)
+
 def index(request):
     if not request.user.is_authenticated():
         return render(request, 'packages/login.html')
@@ -100,3 +106,21 @@ def track_packages(request):
             ).distinct
 
     return render(request, 'packages/track_packages.html', {'packages': Package})
+
+
+
+
+def cancel_package(request, package_id):
+    package = Package.objects.get(pk=package_id)
+    package.delete()
+    package = Package.objects.filter(user=request.user)
+    return render(request, 'lms/index.html', {'books': package})
+
+
+def extra(request, package_id):
+    if not request.user.is_authenticated():
+        return render(request, 'packages/login.html')
+    else:
+        user = request.user
+        package = get_object_or_404(Package, pk=package_id)
+        return render(request, 'packages/detail.html', {'package': package, 'user': user})
