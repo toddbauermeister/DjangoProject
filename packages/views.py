@@ -30,9 +30,10 @@ def index(request):
         return render(request, 'packages/login.html')
     else:
         packages = Package.objects.filter(user=request.user)
+        user_permissions = user.get_all_permissions()
         #more models to be added here
 
-        return render(request, 'packages/index.html', {'packages': packages})
+        return render(request, 'packages/index.html', {'packages': packages, 'user_permissions':user_permissions})
 
 
 def logout_user(request):
@@ -85,6 +86,9 @@ def update_package_status(request):
                 selected_item_id = get_object_or_404(Driver, pk=request.POST.get('driver_id')).id
                 #Driver.
 
+                #>> > b = Blog.objects.get(id=1)
+                #>> > e = Entry.objects.get(id=234)
+                #>> > b.entry_set.add(e)  # Associates Entry e with Blog b.
             return render(request, 'packages/whmngr_update_package', context)
 
         else:
@@ -104,10 +108,25 @@ def track_packages(request):
 
 
 def cancel_package(request, package_id):
-    package = Package.objects.get(pk=package_id)
-    package.delete()
-    package = Package.objects.filter(user=request.user)
-    return render(request, 'packages/index.html', {'books': package})
+    undesired_statuses = [
+            'Collected',
+            'Out For Delivery',
+            'Delivered',
+            'Failed',
+            'Delayed',
+            'Misrouted',
+            'Lost',
+            'Damaged'
+    ]
+    if Package.get(pk=package_id) not in undesired_statuses:
+        package = Package.objects.get(pk=package_id)
+        package.status = 'Cancelled'
+        packages = Package.objects.filter(user=request.user)
+        return render(request, 'packages/index.html', {'packages': packages})
+
+    else:
+        return render_to_response('packages/index.html', message='Error: Packages Cannot Be Cancelled After Collection')
+
 
 
 def extra(request, package_id):
