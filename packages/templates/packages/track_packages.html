@@ -1,41 +1,25 @@
 <!-- Call me 'User_index'?-->
 {% extends "packages/base.html" %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load staticfiles %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <title>Track_packages</title>
-</head>
-<body>
-    <table>
-        <tr>
-            <th>reference_number</th>
-            <th>status</th>
-            <th>volumetric_weight</th>
-            <th>receiver_city</th>
-        </tr>
-        <tr>
-            {% for package in packages %}
-                {{ packages.reference_number }}
-                {{ packages.status }}
-                {{ packages.volumetric_weight }}
-                {{ packages.receiver_address }}
-            {% endfor %}
-        </tr>
-    </table>
+{% load staticfiles %}
 
 {% block content %}
-<div class="container-fluid">
-  <h1>Your Packages</h1>
-  <p>This is some text.</p>
-</div>
+
+<table>
+    <tr>
+        <th>reference_number</th>
+        <th>status</th>
+        <th>volumetric_weight</th>
+        <th>receiver_city</th>
+    </tr>
+    <tr>
+        {% for package in packages %}
+            {{ packages.reference_number }}
+            {{ packages.status }}
+            {{ packages.volumetric_weight }}
+            {{ packages.receiver_address }}
+        {% endfor %}
+    </tr>
+</table>
+
 {% endblock %}
-</body>
-</html>
