@@ -1,32 +1,41 @@
-<!-- Call me 'User_index'?-->
 {% extends "packages/base.html" %}
 
 {% load staticfiles %}
 
 {% block content %}
 
-<table>
 
-    <thead>
-        <tr>
-            <th>reference_number</th>
-            <th>status</th>
-            <th>volumetric_weight</th>
-            <th>receiver_city</th>
-        </tr>
-    </thead>
+<script>
+    $(document).ready(function() {
+    $('#table').DataTable();
+    } );
+  </script>
 
-    <tbody>
-         {% for package in packages %}
-         <tr>
-             <td>{{ packages.reference_number }}</td>
-             <td>{{ packages.status }}</td>
-             <td>{{ packages.volumetric_weight }}</td>
-             <td>{{ packages.receiver_address }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+<div class="row">
+    <div class="col-md-12">
+      <table id = "index_table" class = "table">
+        <thead>
+          <tr>
+            <th>Reference Number</th>
+            <th>Status</th>
+            <th>Volumetric Weight</th>
+            <th>Destination Address</th>
 
-</table>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for package in packages %}
+            <tr>
+              <th>{{package.reference_number}}</th>
+              <th>{{package.status}}</th>
+              <th>{{package.volumetric_weight}}</th>
+              <th>{{package.client_address}}</th>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 {% endblock %}
