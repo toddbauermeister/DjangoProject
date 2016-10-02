@@ -8,7 +8,6 @@ from .forms import PackageForm, UserForm
 from .models import User, Branch, Package, Driver
 
 
-
 def create_package(request):
     if not request.user.is_authenticated():
         return render(request, 'packages/create_package.html')
@@ -89,6 +88,20 @@ def update_package_status(request):
                 #>> > b = Blog.objects.get(id=1)
                 #>> > e = Entry.objects.get(id=234)
                 #>> > b.entry_set.add(e)  # Associates Entry e with Blog b.
+
+                '''
+                OR
+
+                Hack AF
+
+                In template check:
+
+                {% if packages AND statuses AND satellite_offices AND branch offices %}
+                Display this shit
+                {% else %}
+                Display That shit
+                {% endif %}
+                '''
             return render(request, 'packages/whmngr_update_package', context)
 
         else:
@@ -126,7 +139,6 @@ def cancel_package(request, package_id):
 
     else:
         return render_to_response('packages/index.html', message='Error: Packages Cannot Be Cancelled After Collection')
-
 
 
 def extra(request, package_id):
