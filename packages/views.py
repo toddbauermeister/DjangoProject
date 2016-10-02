@@ -99,7 +99,7 @@ def cancel_package(request, package_id):
     package = Package.objects.get(pk=package_id)
     package.delete()
     package = Package.objects.filter(user=request.user)
-    return render(request, 'lms/index.html', {'books': package})
+    return render(request, 'packages/index.html', {'books': package})
 
 
 def extra(request, package_id):
