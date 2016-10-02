@@ -1,10 +1,20 @@
 {% extends "base.html" %}
+{% block formlife %}
+<form action="/your_username/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
 <head>
     <meta charset="UTF-8">
      {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
     <title>Detail</title>
 </head>
+{% endblock %}
+{% block navlist %}
+<li class="active"><a href="extra.html">Extra</a></li>
+{% endblock %}
 <body>
 {% block extra %}
      <h1>This is the extra detail</h1>

@@ -40,7 +40,7 @@ def index(request):
 
             })
         else:
-            return render(request, 'packages/index.html', {'albums': packs})
+            return render(request, 'packages/index.html', {'packages': packs})
 
 
 def logout_user(request):
