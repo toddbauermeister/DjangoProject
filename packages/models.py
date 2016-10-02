@@ -49,8 +49,6 @@ class Package(models.Model):
     receiver_city = models.CharField(max_length=50)
     id_required = models.BooleanField(default=True)
 
-
-
     def get_statuses(self):
         statuses = [
             'Cancelled',

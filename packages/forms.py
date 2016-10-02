@@ -11,7 +11,6 @@ class PackageForm(forms.ModelForm):
         fields = ['reference_number', 'volumetric_weight', 'client_address',
                   'client_city', 'receiver_address', 'receiver_city']
 
-
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
