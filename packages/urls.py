@@ -12,7 +12,7 @@ urlpatterns = [
 
     url(r'^(?P<package_id>[0-9]+)/$', views.extra, name='extra'),
 
-    url(r'^create_package/$', views.create_package, name='create_package'),
+    url(r'^create_package/', views.create_package, name='create_package'),
 
     url(r'^(?P<package_id>[0-9]+)/cancel_package/(?P<student_id>[0-9]+)/$', views.cancel_package, name='cancel_package'),
 
