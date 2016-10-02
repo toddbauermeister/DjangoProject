@@ -82,7 +82,7 @@ def update_package_status(request):
         satellite_offices = Branch.get_satellite_offices()
         branch_offices = Branch.get_branch_offices()
 
-        if request.user.get_username != 'warehousemanager':
+        if request.user.get_username != 'warehousemanager': #Don't know if this will work yo
             context = {'packages': packages, 'drivers': drivers, 'statuses': statuses,
                    'satellite_offices': satellite_offices, 'branch_offices': branch_offices }
 
