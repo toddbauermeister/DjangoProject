@@ -28,7 +28,15 @@
                 <td>{{ packages.volumetric_weight }}</td>
                 <td>{{ packages.receiver_address }}</td>
                 <td>{{ packages.receiver_city}}</td>
-                <td> Make mea dropdown </td>
+                <td>
+                    <form method="POST">
+                        <select name="driver_id">
+                            {% for driver in drivers %}
+                                <option value="{{ driver.id }}">{{ driver }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </td>
                 <td> Make me a dropdown </td>
             </tr>
             {% endfor %}
