@@ -89,7 +89,7 @@ def update_package_status(request):
 
 def track_packages(request):
     if not request.user.is_authenticated():
-        return render(request, 'packages/loginland.html')
+        return render(request, 'packages/login.html')
     else:
         packages = Package.objects.filter(user=request.user)
 
