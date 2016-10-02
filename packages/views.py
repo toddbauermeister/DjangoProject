@@ -5,12 +5,12 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from .forms import PackageForm, UserForm
-from .models import User, Branch, Package, WarehouseManager, Driver
+from .models import User, Branch, Package, Driver
 
 
 def create_package(request):
-    if not request.client.is_authenticated():
-        return render(request, 'packages/login.html')
+    if not request.user.is_authenticated():
+        return render(request, 'packages/create_package.html')
     else:
         form = PackageForm(request.POST or None, request.FILES or None)
         if form.is_valid():
@@ -82,8 +82,8 @@ def update_package_status(request):
         return request, 'packages/update_package', context
 
 def track_packages(request):
-    if not request.user.is_authernticated():
-        return render(request, 'package/login.html')
+    if not request.user.is_authenticated():
+        return render(request, 'packages/loginland.html')
     else:
         packages = Package.objects.filter(user=request.user)
 
