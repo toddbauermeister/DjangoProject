@@ -77,6 +77,13 @@ def update_package_status(request):
             context = {'packages': packages, 'drivers': drivers, 'statuses': statuses,
                    'satellite_offices': satellite_offices, 'branch_offices': branch_offices }
 
+            form = request.POST
+
+            if request.method == 'POST':
+
+                selected_item_id = get_object_or_404(Driver, pk=request.POST.get('driver_id')).id
+                #Driver.
+
             return render(request, 'packages/whmngr_update_package', context)
 
         else:
@@ -99,7 +106,7 @@ def cancel_package(request, package_id):
     package = Package.objects.get(pk=package_id)
     package.delete()
     package = Package.objects.filter(user=request.user)
-    return render(request, 'lms/index.html', {'books': package})
+    return render(request, 'packages/index.html', {'books': package})
 
 
 def extra(request, package_id):
