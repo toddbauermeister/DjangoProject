@@ -81,9 +81,9 @@ def update_package_status(request):
 
         else:
             context = {'packages': packages, 'statuses': statuses,
-                    'satellite_offices': satellite_offices, 'branch_offices': branch_offices }
+                       'satellite_offices': satellite_offices, 'branch_offices': branch_offices}
 
-           return render(request, 'packages/driver_update_package', context)
+            return render(request, 'packages/driver_update_package', context)
 
 
 def track_packages(request):
