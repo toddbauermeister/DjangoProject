@@ -77,6 +77,13 @@ def update_package_status(request):
             context = {'packages': packages, 'drivers': drivers, 'statuses': statuses,
                    'satellite_offices': satellite_offices, 'branch_offices': branch_offices }
 
+            form = request.POST
+
+            if request.method == 'POST':
+
+                selected_item_id = get_object_or_404(Driver, pk=request.POST.get('driver_id')).id
+                #Driver.
+
             return render(request, 'packages/whmngr_update_package', context)
 
         else:
