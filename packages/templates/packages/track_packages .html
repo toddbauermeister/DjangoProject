@@ -13,6 +13,22 @@
     <title>Track_packages</title>
 </head>
 <body>
+    <table>
+        <tr>
+            <th>reference_number</th>
+            <th>status</th>
+            <th>volumetric_weight</th>
+            <th>receiver_city</th>
+        </tr>
+        <tr>
+            {% for package in packages %}
+                {{ packages.reference_number }}
+                {{ packages.status }}
+                {{ packages.volumetric_weight }}
+                {{ packages.receiver_address }}
+            {% endfor %}
+        </tr>
+    </table>
 
 {% block content %}
 <div class="container-fluid">

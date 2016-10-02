@@ -1,33 +1,31 @@
 {% extends "packages/base.html" %}
     {% load staticfiles %}
     <title>Login Here</title>
+{% block nav %}
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Mu Logistics</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="/index">Home</a></li>
+                <li class="active"><a href="/login_user">Login</a></li>
+                <li><a href="/create_package">Extra</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+{% endblock %}
+{% block content %}
 <br>
      <p>welcome to login page, this is where you log in</p>
 <br>
-    {% block content %}
-        <form action="login.html" method="post">
-
-                <div class="container">
-                    <label><b>Username</b></label>
-                        <input type="text" placeholder="Enter Username" name="uname" required method="POST">
-
-                    <label><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="psw" required method="POST">
-
-                    <button type="submit">Login</button>
-                        <input type="checkbox" checked="checked"> Remember me
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
-</form>
 {% endblock %}
 
-
-</head>
-<body>
-
-</body>
-</html>

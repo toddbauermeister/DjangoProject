@@ -36,7 +36,7 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
-                <li><a href="/index">Home</a></li>
+                <li class="active"><a href="/index">Home</a></li>
                 <li><a href="/login_user">Login</a></li>
                 <li><a href="/create_package">Extra</a></li>
               </ul>
@@ -47,6 +47,9 @@
     <br>
     <br>
     <br>
+    {% block form %}
+
+    {% endblock %}
     {% block content %}
     <!-- Replace this div in each html file -->
         <div class="container">
