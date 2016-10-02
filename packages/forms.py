@@ -19,3 +19,7 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ['username', 'password']
 
+
+class DriverSelectForm(forms.ModelForm):
+    drivers = forms.ModelChoiceField(queryset=Driver.objects.all())
+
