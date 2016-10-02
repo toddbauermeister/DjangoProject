@@ -30,17 +30,6 @@ def index(request):
     else:
         packs = Package.objects.filter(user=request.user)
         #more models to be added here
-        query = request.GET.get("q")
-
-        packs = packs.filter(
-            Q(reference_number__icontains=query) |
-            Q(status__icontains=query) |
-            Q(volumetric_weight__icontains=query) |
-            Q(client_address__icontains=query) |
-            Q(client_city__icontains=query) |
-            Q(receiver_address__icontains=query)
-
-        ).distinct
 
         return render(request, 'packages/index.html', {'packs': packs})
 
