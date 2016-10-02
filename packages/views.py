@@ -80,8 +80,8 @@ def update_package_status(request):
             return render(request, 'packages/whmngr_update_package', context)
 
         else:
-           context = {'packages': packages, 'statuses': statuses,
-                  'satellite_offices': satellite_offices, 'branch_offices': branch_offices }
+            context = {'packages': packages, 'statuses': statuses,
+                    'satellite_offices': satellite_offices, 'branch_offices': branch_offices }
 
            return render(request, 'packages/driver_update_package', context)
 
