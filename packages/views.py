@@ -8,6 +8,7 @@ from .forms import PackageForm, UserForm
 from .models import User, Branch, Package, Driver
 
 
+
 def create_package(request):
     if not request.user.is_authenticated():
         return render(request, 'packages/create_package.html')
