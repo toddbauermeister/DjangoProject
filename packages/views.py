@@ -83,14 +83,17 @@ def update_package_status(request):
         branch_offices = Branch.get_branch_offices()
 
         if request.user.get_username != 'warehousemanager': #Don't know if this will work yo
-            context = {'packages': packages, 'drivers': drivers, 'statuses': statuses,
-                   'satellite_offices': satellite_offices, 'branch_offices': branch_offices }
+            context = {'packages': packages}
 
             form = request.POST
 
             if request.method == 'POST':
 
-                selected_item_id = get_object_or_404(Driver, pk=request.POST.get('driver_id')).id
+                selected_driver_id = get_object_or_404(Driver, pk=request.POST.get('driver_id'))
+                package = Package.objects.get(pk=request.POST.get('driver_id'))
+                package.entry_set.add(selected_driver_id)
+
+
                 #Driver.
 
                 #>> > b = Blog.objects.get(id=1)
@@ -98,7 +101,7 @@ def update_package_status(request):
                 #>> > b.entry_set.add(e)  # Associates Entry e with Blog b.
 
                 '''
-                OR
+                AND
 
                 Hack AF
 
@@ -110,13 +113,13 @@ def update_package_status(request):
                 Display That shit
                 {% endif %}
                 '''
-            return render(request, 'packages/whmngr_update_package', context)
+            return render(request, 'packages/whmngr_update_package', context) #fix me
 
         else:
             context = {'packages': packages, 'drivers': drivers, 'statuses': statuses,
                        'satellite_offices': satellite_offices, 'branch_offices': branch_offices}
 
-            return render(request, 'packages/driver_update_package', context)
+            return render(request, 'packages/driver_update_package', context) #fix me
 
 
 def track_packages(request):

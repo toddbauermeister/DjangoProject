@@ -6,20 +6,27 @@
 {% block content %}
 
 <table>
-    <tr>
-        <th>reference_number</th>
-        <th>status</th>
-        <th>volumetric_weight</th>
-        <th>receiver_city</th>
-    </tr>
-    <tr>
-        {% for package in packages %}
-            {{ packages.reference_number }}
-            {{ packages.status }}
-            {{ packages.volumetric_weight }}
-            {{ packages.receiver_address }}
+
+    <thead>
+        <tr>
+            <th>reference_number</th>
+            <th>status</th>
+            <th>volumetric_weight</th>
+            <th>receiver_city</th>
+        </tr>
+    </thead>
+
+    <tbody>
+         {% for package in packages %}
+         <tr>
+             <td>{{ packages.reference_number }}</td>
+             <td>{{ packages.status }}</td>
+             <td>{{ packages.volumetric_weight }}</td>
+             <td>{{ packages.receiver_address }}</td>
+        </tr>
         {% endfor %}
-    </tr>
+    </tbody>
+
 </table>
 
 {% endblock %}

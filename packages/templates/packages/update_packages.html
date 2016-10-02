@@ -10,42 +10,43 @@
 
         <thead>
             <tr>
-                <th>reference_number</th>
-                <th>status</th>
-                <th>volumetric_weight</th>
-                <th>receiver_city</th>
-                <th>drivers</th>
-                <th>offices</th> <!--Make satellite offices and branch offices one list-->
+                <th>Reference Number</th>
+                <th>Status</th>
+                <th>Volumetric Weight</th>
+                <th>Receiver Address</th>
+                <th>Receiver City</th>
+                <th>Drivers</th>
+                <th>Offices</th> <!--Make satellite offices and branch offices one list-->
             </tr>
         </thead>
 
         <tbody>
             {% for package in packages %}
-                <tr>
-                    <td>{{ packages.reference_number }}</td>
-                    <td>{{ packages.status }}</td>
-                    <td>{{ packages.volumetric_weight }}</td>
-                    <td>{{ packages.receiver_address }}</td>
-                    <td> Make mea dropdown </td>
-                    <td> Make me a dropdown </td>
-                </tr>
+            <tr>
+                <td>{{ packages.reference_number }}</td>
+                <td>{{ packages.status }}</td>
+                <td>{{ packages.volumetric_weight }}</td>
+                <td>{{ packages.receiver_address }}</td>
+                <td>{{ packages.receiver_city}}</td>
+                <td> Make mea dropdown </td>
+                <td> Make me a dropdown </td>
+            </tr>
             {% endfor %}
         </tbody>
 
     </table>
 
-{% elif packages AND drivers AND statuses %}
+{% else %}
 
     <table>
 
         <thead>
             <tr>
-                <th>reference_number</th>
-                <th>status</th>
-                <th>volumetric_weight</th>
-                <th>receiver_city</th>
-                <th>drivers</th>
-                <th>offices</th> <!--Make satellite offices and branch offices one list-->
+                <th>Reference Number</th>
+                <th>Status</th>
+                <th>Volumetric Weight</th>
+                <th>Receiver Address</th>
+                <th>Receiver City</th>
             </tr>
         </thead>
 
@@ -56,8 +57,7 @@
                     <td>{{ packages.status }}</td>
                     <td>{{ packages.volumetric_weight }}</td>
                     <td>{{ packages.receiver_address }}</td>
-                    <td> Make mea dropdown </td>
-                    <td> Make me a dropdown </td>
+                    <td>{{ packages.receiver_city }}</td>
                 </tr>
             {% endfor %}
         </tbody>
