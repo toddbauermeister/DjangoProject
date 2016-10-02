@@ -10,14 +10,14 @@ from .models import User, Branch, Package, Driver
 
 def create_package(request):
     if not request.user.is_authenticated():
-        return render(request, 'packages/create_package.html')
+        return render(request, 'packages/create_packages.html')
     else:
         form = PackageForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             package = form.save(commit=False)
             package.user = request.user
 
-            return render(request, 'packages/extra.html', {'package': package})
+            return render(request, 'packages/index.html', {'package': package})
         context = {
                 "form": form,
          }
@@ -155,4 +155,4 @@ def extra(request, package_id):
     else:
         user = request.user
         package = get_object_or_404(Package, pk=package_id)
-        return render(request, 'packages/extra.html', {'package': package, 'user': user})
+        return render(request, 'packages/index.html', {'package': package, 'user': user})
