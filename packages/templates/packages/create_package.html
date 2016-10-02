@@ -1,53 +1,38 @@
 {% extends 'packages/base.html' %}
+{% block title %}Add a New Package{% endblock %}
+{% block books_active %}active{% endblock %}
 
-<head>
-     {% load staticfiles %}
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
-    <title>Create package</title>
-    {% block content %}
-        <br>
-    <h1>This is where you create packages</h1>
-    {% endblock %}
+{% block content %}
+    {% load staticfiles %}
 
-</head>
-{% block navlist %}
-    <li><a href="/index">Home</a></li>
-    <li class="active"><a href="/create_package">Create Packages</a></li>
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-sm-12 col-md-7">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h3>Add a New Package</h3>
+                            {% if error_message %}
+                                <p><strong>{{ error_message }}</strong></p>
+                            {% endif %}
+                            <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% include 'packages/form.html' %}
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
 
 {% endblock %}
-
-<body>
-
- <form id="contact" action="" method="post">
-            <h3>Order a delivery </h3>
-            <h4>Place an order and we'll pick it up for you! :)</h4>
-                <br>
-                <br>
-            <h4>Package Details</h4>
-            <fieldset>
-              <input placeholder="Length" type="text" tabindex="1" required autofocus>
-            </fieldset>
-            <fieldset>
-              <input placeholder="Breadth" type="text" tabindex="2" required>
-            </fieldset>
-            <fieldset>
-              <input placeholder="Height" type="text" tabindex="3" required>
-            </fieldset>
-            <fieldset>
-              <input placeholder="Destination Address" type="text" tabindex="4" required>
-            </fieldset>
-            <fieldset>
-              <input placeholder="Destination City" type="text" tabindex="5" required>
-            </fieldset>
-            <fieldset>
-                <label>
-                    <input type="checkbox"> Remember me
-                </label>
-            </fieldset>
-            <fieldset>
-              <button name="submit" type="submit" id="create_package_submit" >Submit</button>
-            </fieldset>
- </form>
-</body>
-</html>
