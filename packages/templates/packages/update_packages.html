@@ -1,0 +1,69 @@
+{% extends "packages/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+{% if packages AND statuses AND drivers AND satellite_offices AND branch offices %}
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>reference_number</th>
+                <th>status</th>
+                <th>volumetric_weight</th>
+                <th>receiver_city</th>
+                <th>drivers</th>
+                <th>offices</th> <!--Make satellite offices and branch offices one list-->
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for package in packages %}
+                <tr>
+                    <td>{{ packages.reference_number }}</td>
+                    <td>{{ packages.status }}</td>
+                    <td>{{ packages.volumetric_weight }}</td>
+                    <td>{{ packages.receiver_address }}</td>
+                    <td> Make mea dropdown </td>
+                    <td> Make me a dropdown </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+{% elif packages AND drivers AND statuses %}
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>reference_number</th>
+                <th>status</th>
+                <th>volumetric_weight</th>
+                <th>receiver_city</th>
+                <th>drivers</th>
+                <th>offices</th> <!--Make satellite offices and branch offices one list-->
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for package in packages %}
+                <tr>
+                    <td>{{ packages.reference_number }}</td>
+                    <td>{{ packages.status }}</td>
+                    <td>{{ packages.volumetric_weight }}</td>
+                    <td>{{ packages.receiver_address }}</td>
+                    <td> Make mea dropdown </td>
+                    <td> Make me a dropdown </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+{% endif %}
+
+{% endblock %}

@@ -75,7 +75,7 @@ class Driver(models.Model):
     package = models.ForeignKey(Package, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
-    license_number = models.CharField(max_length=50)
+    driver_id = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
 
     def __str__(self):
