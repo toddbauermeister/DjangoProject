@@ -146,7 +146,7 @@ def cancel_package(request, package_id):
         return render(request, 'packages/index.html', {'packages': packages})
 
     else:
-        return render_to_response('packages/index.html', message='Error: Packages Cannot Be Cancelled After Collection')
+        return render('packages/index.html', error_message='Error: Packages Cannot Be Cancelled After Collection')
 
 
 def extra(request, package_id):
