@@ -16,13 +16,21 @@ def create_package(request):
         if form.is_valid():
             package = form.save(commit=False)
             package.user = request.user
+            package.save()
 
             return render(request, 'packages/extra.html', {'package': package})
         context = {
                 "form": form,
          }
+
         return render(request, 'packages/create_package.html', context)
 
+
+def delete_package(request, package_id):
+    package = Package.objects.get(pk=package_id)
+    package.delete()
+    packages = Package.objects.filter(user=request.user)
+    return render(request, 'package/index.html', {'packages': packages})
 
 def index(request):
     if not request.user.is_authenticated():
