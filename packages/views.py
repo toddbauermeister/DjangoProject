@@ -18,11 +18,11 @@ def create_package(request):
             package.user = request.client
 
 
-            return render(request, 'lms/detail.html', {'package': package})
+            return render(request, 'packages/extra.html', {'package': package})
         context = {
                 "form": form,
          }
-        return render(request, 'lms/create_book.html', context)
+        return render(request, 'packages/create_package.html', context)
 
 def index(request):
     if not request.user.is_authenticated():
@@ -38,7 +38,6 @@ def index(request):
             Q(volumetric_weight__icontains=query) |
             Q(client_address__icontains=query) |
             Q(client_city__icontains=query) |
-            Q(driver__icontains=query) |
             Q(receiver_address__icontains=query)
 
         ).distinct
@@ -74,7 +73,7 @@ def login_user(request):
 
 def update_package_status(request):
     if not request.user.is_authenticated():
-        return render(request, 'packages/login.html')
+        return render(request, 'packages/updatepackages.html')
 
     else:
         packages = Package.objects.filter(user=request.user)
@@ -123,4 +122,4 @@ def extra(request, package_id):
     else:
         user = request.user
         package = get_object_or_404(Package, pk=package_id)
-        return render(request, 'packages/detail.html', {'package': package, 'user': user})
+        return render(request, 'packages/extra.html', {'package': package, 'user': user})
