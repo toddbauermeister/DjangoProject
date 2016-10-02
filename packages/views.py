@@ -16,7 +16,7 @@ def create_package(request):
         form = PackageForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             package = form.save(commit=False)
-            package.user = request.client
+            package.user = request.user
 
             return render(request, 'packages/extra.html', {'package': package})
         context = {
@@ -27,13 +27,21 @@ def create_package(request):
 
 def index(request):
     if not request.user.is_authenticated():
-        return render(request, 'packages/login.html')
+        return render(request, 'packages/login_user.html')
     else:
-        packages = Package.objects.filter(user=request.user)
-        user_permissions = user.get_all_permissions()
-        #more models to be added here
+        packs = Package.objects.filter(user=request.user)
+        query = request.GET.get("q")
+        if query:
+            packs = packs.filter(
+                Q(reference_number__icontains=query) |
+                Q(status__icontains=query)
+            ).distinct()
+            return render(request, 'packages/index.html', {
+                'packages': packs,
 
-        return render(request, 'packages/index.html', {'packages': packages, 'user_permissions':user_permissions})
+            })
+        else:
+            return render(request, 'packages/index.html', {'albums': packs})
 
 
 def logout_user(request):
@@ -42,7 +50,7 @@ def logout_user(request):
     context = {
         "form": form,
     }
-    return render(request, 'packages/login.html', context)
+    return render(request, 'packages/login_user.html', context)
 
 
 def login_user(request):
@@ -56,10 +64,10 @@ def login_user(request):
                 packs = Package.objects.filter(user=request.user)
                 return render(request, 'packages/index.html', {'packs': packs})
             else:
-                return render(request, 'packages/login.html', {'error_message': 'Your account has been disabled'})
+                return render(request, 'packages/login_user.html', {'error_message': 'Your account has been disabled'})
         else:
-            return render(request, 'packages/login.html', {'error_message': 'Invalid login'})
-    return render(request, 'packages/login.html')
+            return render(request, 'packages/login_user.html', {'error_message': 'Invalid login'})
+    return render(request, 'packages/login_user.html')
 
 
 #Direct Warehouse Managers and Drivers here
@@ -100,7 +108,7 @@ def update_package_status(request):
 
 def track_packages(request):
     if not request.user.is_authenticated():
-        return render(request, 'packages/login.html')
+        return render(request, 'packages/login_user.html')
     else:
         packages = Package.objects.filter(user=request.user)
 
@@ -131,7 +139,7 @@ def cancel_package(request, package_id):
 
 def extra(request, package_id):
     if not request.user.is_authenticated():
-        return render(request, 'packages/login.html')
+        return render(request, 'packages/login_user.html')
     else:
         user = request.user
         package = get_object_or_404(Package, pk=package_id)
