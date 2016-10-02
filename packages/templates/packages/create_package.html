@@ -34,7 +34,39 @@
           </div>
         </nav>
 {% endblock %}
+
+
 <body>
 
+ <form id="contact" action="" method="post">
+            <h3>Order a delivery </h3>
+            <h4>Place an order and we'll pick it up for you! :)</h4>
+                <br>
+                <br>
+            <h4>Package Details</h4>
+            <fieldset>
+              <input placeholder="Length" type="text" tabindex="1" required autofocus>
+            </fieldset>
+            <fieldset>
+              <input placeholder="Breadth" type="text" tabindex="2" required>
+            </fieldset>
+            <fieldset>
+              <input placeholder="Height" type="text" tabindex="3" required>
+            </fieldset>
+            <fieldset>
+              <input placeholder="Destination Address" type="text" tabindex="4" required>
+            </fieldset>
+            <fieldset>
+              <input placeholder="Destination City" type="text" tabindex="5" required>
+            </fieldset>
+            <fieldset>
+                <label>
+                    <input type="checkbox"> Remember me
+                </label>
+            </fieldset>
+            <fieldset>
+              <button name="submit" type="submit" id="create_package_submit" >Submit</button>
+            </fieldset>
+ </form>
 </body>
 </html>

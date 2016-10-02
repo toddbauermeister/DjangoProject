@@ -21,10 +21,37 @@
           </div>
         </nav>
 {% endblock %}
-<div class="container-fluid">
-  <h1>This is the Index</h1>
-  <p>This is some text.</p>
-</div>
-</body>
+
+{% block content %}
+<!-- Replace this div in each html file -->
+  <div class="row">
+    <div class="col-md-12">
+      <table class = "table">
+        <thead>
+          <tr>
+            <th>Reference Number</th>
+            <th>Status</th>
+            <th>Volumetric Weight</th>
+            <th>Destination Address</th>
+            <th>Destination City</th>
+          </tr>
+        </thead>
+
+        <thead>
+          {% for package in packages %}
+            <tr>
+              <th>{{package.reference_number}}</th>
+              <th>{{package.status}}</th>
+              <th>{{package.volumetric_weight}}</th>
+              <th>{{package.client_address}}</th>
+              <th>{{package.client_city}}</th>
+            </tr>
+          {% endfor %}
+        </thead>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}
 </html>
 

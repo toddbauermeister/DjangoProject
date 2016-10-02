@@ -28,10 +28,10 @@ def index(request):
     if not request.user.is_authenticated():
         return render(request, 'packages/login.html')
     else:
-        packs = Package.objects.filter(user=request.user)
+        packages = Package.objects.filter(user=request.user)
         #more models to be added here
 
-        return render(request, 'packages/index.html', {'packs': packs})
+        return render(request, 'packages/index.html', {'packages': packages})
 
 
 def logout_user(request):
