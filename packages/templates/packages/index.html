@@ -30,7 +30,7 @@
           </tr>
         </thead>
 
-        <thead>
+        <tbody>
           {% for package in packages %}
             <tr>
               <th>{{package.reference_number}}</th>
@@ -40,11 +40,13 @@
               <th>{{package.client_city}}</th>
             </tr>
           {% endfor %}
-        </thead>
+        </tbody>
       </table>
     </div>
   </div>
 
 {% endblock %}
 </html>
+
+
 
