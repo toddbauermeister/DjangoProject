@@ -17,12 +17,12 @@ def create_package(request):
             package = form.save(commit=False)
             package.user = request.client
 
-
             return render(request, 'packages/extra.html', {'package': package})
         context = {
                 "form": form,
          }
         return render(request, 'packages/create_package.html', context)
+
 
 def index(request):
     if not request.user.is_authenticated():
@@ -60,6 +60,8 @@ def login_user(request):
     return render(request, 'packages/login.html')
 
 
+#Direct Warehouse Managers and Drivers here
+#Method will return appropriate context + template per user
 def update_package_status(request):
     if not request.user.is_authenticated():
         return render(request, 'packages/updatepackages.html')
@@ -71,9 +73,18 @@ def update_package_status(request):
         satellite_offices = Branch.get_satellite_offices()
         branch_offices = Branch.get_branch_offices()
 
-        context = {'packages': packages, 'statuses': statuses, 'satellite_offices': satellite_offices}
+        if request.user.get_username != 'warehousemanager':
+            context = {'packages': packages, 'drivers': drivers, 'statuses': statuses,
+                   'satellite_offices': satellite_offices, 'branch_offices': branch_offices }
 
-        return request, 'packages/update_package', context
+            return render(request, 'packages/whmngr_update_package', context)
+
+        else:
+            context = {'packages': packages, 'statuses': statuses,
+                       'satellite_offices': satellite_offices, 'branch_offices': branch_offices}
+
+            return render(request, 'packages/driver_update_package', context)
+
 
 def track_packages(request):
     if not request.user.is_authenticated():
@@ -81,21 +92,7 @@ def track_packages(request):
     else:
         packages = Package.objects.filter(user=request.user)
 
-        query = request.GET.get("q")
-
-        packages = packages.filter(
-                Q(reference_number__icontains=query) |
-                Q(status__icontains=query) |
-                Q(volumetric_weight__icontains=query) |
-                Q(client_address__icontains=query) |
-                Q(client_city__icontains=query) |
-                Q(receiver_address__icontains=query)
-
-            ).distinct
-
-    return render(request, 'packages/track_packages.html', {'packages': Package})
-
-
+    return render(request, 'packages/track_packages.html', {'packages': packages})
 
 
 def cancel_package(request, package_id):
