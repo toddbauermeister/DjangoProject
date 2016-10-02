@@ -1,3 +1,4 @@
+{% extends 'packages/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
     <title>Create package</title>
+    {% block content %}
+        <br>
     <h1>This is where you create packages</h1>
+    {% endblock %}
+
 </head>
 <body>
 
