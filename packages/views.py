@@ -5,11 +5,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from .forms import PackageForm, UserForm
-from .models import User, Branch, Package, Driver
-
-
-def mypacks(request):
-    return HttpResponse("Hello, world. You're at the package index.")
+from .models import User, Branch, Package, WarehouseManager, Driver
 
 
 def create_package(request):
@@ -19,7 +15,7 @@ def create_package(request):
         form = PackageForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             package = form.save(commit=False)
-            package.user = request.user
+            package.user = request.client
 
 
 def index(request):
@@ -80,8 +76,6 @@ def update_package_status(request):
         statuses = Package.get_statuses() #In template -> Check If Package is in office. If it is, let user pick In and out of branch and satellite offices
         satellite_offices = Branch.get_satellite_offices()
         branch_offices = Branch.get_branch_offices()
-
-
 
         context = {'packages': packages, 'statuses': statuses, 'satellite_offices': satellite_offices}
 
