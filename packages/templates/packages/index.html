@@ -1,33 +1,70 @@
-<!-- Call me 'admin_index'?-->
-{% extends "packages/base.html" %}
-{% block navlist %}
-    <li><a href="/create_package">Create a Package</a></li>
-    <li><a href="/track_packages">Track Packages</a></li>
-    <li><a href="/extra">Extra</a></li>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}MuLogistics{% endblock %}</title>
+    {% load staticfiles %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="{% static 'packages/css/bootstrap.css' %}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="{% static 'music/js/main.js' %}"></script>
 
-{% block content %}
-<!-- Replace this div in each html file -->
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
 
-  <script>
-    $(document).ready(function() {
-    $('#table').DataTable();
-    } );
-  </script>
+          <!-- Header -->
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{% url 'packages:index' %}">MuLogistics</a>
+          </div>
 
+          <!-- Items -->
+          <div class="collapse navbar-collapse" id="topNavBar">
+              <ul class="nav navbar-nav">
+                  <li class="{% block packs_active %}{% endblock %}"><a href="{% url 'packages:index' %}"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>&nbsp;Packages </a></li>
+                  <li class="{% block drivers_active %}{% endblock %}"><a href="{% url 'packages:track_packages' %}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Track Packages</a></li>
+              </ul>
+              <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'packages:index' %}">
+                  <div class="form-group">
+                      <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+                  </div>
+                  <button type="submit" class="btn btn-default">Search</button>
+              </form>
+              <ul class="nav navbar-nav navbar-right">
+                  <li>
+                      <a href="{% url 'packages:create_package' %}">
+                          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Package
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{% url 'packages:logout_user' %}">
+                          <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                      </a>
+                  </li>
+              </ul>
+          </div>
 
-
-<div class="row">
+      </div>
+  </nav>
+{% block body %}
+  <div class="row">
     <div class="col-md-12">
       <table id = "index_table" class = "table">
         <thead>
           <tr>
             <th>Reference Number</th>
-            <th>Volumetric Weight</th>
-            <th>Pick Up Address</th>
-            <th>Pick Up City</th>
+            <th>Status</th>
+            <th>Driver Package</th>
+            <th>Driver Name</th>
             <th>Destination Address</th>
-            <th>Cancel Package</th>
 
           </tr>
         </thead>
@@ -36,10 +73,10 @@
           {% for package in packages %}
             <tr>
               <th>{{package.reference_number}}</th>
-              <th>{{package.volumetric_weight}}</th>
-              <th>{{package.client_address}}</th>
-              <th>{{package.client_city}}</th>
-              <th>{{package.receiver_city}}</th>
+              <th>{{package.status}}</th>
+              <th>{{driver.package}}</th>
+              <th>{{driver.name}}</th>
+              <th>{{package.receiver_address}}</th>
             </tr>
           {% endfor %}
         </tbody>
@@ -47,8 +84,7 @@
     </div>
   </div>
 
+
 {% endblock %}
-
-
-
-
+</body>
+</html>

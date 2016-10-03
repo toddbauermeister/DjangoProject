@@ -15,13 +15,14 @@
                 <div class="col-sm-4 col-md-3">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <a href="{% url 'index' %}">
+                            <a href="{% url 'packages:index' %}">
                                 {% if package.reference_number %}
                                     <img src="{{ package.index.url }}" class="img-responsive">
                                 {% else %}
                                     <h3>No image to display</h3>
                                 {% endif %}
                             </a>
+                            <h1>Your package was added</h1>
                             <h1>{{ package.reference_number }} <small>{{ package.status }}</small></h1>
                             <h2>{{ package.client_city }}</h2>
                         </div>

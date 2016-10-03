@@ -10,7 +10,7 @@ from .models import User, Branch, Package, Driver
 
 def create_package(request):
     if not request.user.is_authenticated():
-        return render(request, 'packages/create_packages.html')
+        return render(request, 'packages/login_user.html')
     else:
         form = PackageForm(request.POST or None, request.FILES or None)
         if form.is_valid():
@@ -18,7 +18,7 @@ def create_package(request):
             package.user = request.user
             package.save()
 
-            return render(request, 'packages/index.html', {'package': package})
+            return render(request, 'packages/extra.html', {'package': package})
         context = {
                 "form": form,
          }
@@ -31,6 +31,16 @@ def delete_package(request, package_id):
     package.delete()
     packages = Package.objects.filter(user=request.user)
     return render(request, 'package/index.html', {'packages': packages})
+
+
+
+def extra(request, package_id):
+    if not request.user.is_authenticated():
+        return render(request, 'packages/login_user.html')
+    else:
+        user = request.user
+        package = get_object_or_404(Package, pk=package_id)
+        return render(request, 'packages/extra.html', {'package': package, 'user': user})
 
 def index(request):
     if not request.user.is_authenticated():
@@ -160,10 +170,3 @@ def cancel_package(request, package_id):
         return render('packages/index.html', error_message='Error: Packages Cannot Be Cancelled After Collection')
 
 
-def extra(request, package_id):
-    if not request.user.is_authenticated():
-        return render(request, 'packages/login_user.html')
-    else:
-        user = request.user
-        package = get_object_or_404(Package, pk=package_id)
-        return render(request, 'packages/index.html', {'package': package, 'user': user})
