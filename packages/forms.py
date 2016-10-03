@@ -8,7 +8,7 @@ class PackageForm(forms.ModelForm):
 
     class Meta:
         model = Package
-        fields = ['reference_number', 'volumetric_weight', 'status', 'client_address',
+        fields = ['volumetric_weight', 'client_address',
                   'client_city', 'receiver_address', 'receiver_city']
 
 class UserForm(forms.ModelForm):

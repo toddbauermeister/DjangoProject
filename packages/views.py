@@ -6,6 +6,8 @@ from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from .forms import PackageForm, UserForm
 from .models import User, Branch, Package, Driver
+import string
+import random
 
 
 def create_package(request):
@@ -16,6 +18,8 @@ def create_package(request):
         if form.is_valid():
             package = form.save(commit=False)
             package.user = request.user
+            package.reference_number = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
+            package.status = 'Created'
             package.save()
 
             return render(request, 'packages/extra.html', {'package': package})
