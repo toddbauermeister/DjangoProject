@@ -91,16 +91,20 @@ def login_user(request):
 #Method will return appropriate context + template per user
 def update_package_status(request):
     if not request.user.is_authenticated():
-        return render(request, 'packages/updatepackages.html')
+        return render(request, 'packages/login_user.html')
 
     else:
         packages = Package.objects.filter(user=request.user)
         drivers = Driver.objects.all()
-        statuses = Package.get_statuses() #In template -> Check If Package is in office. If it is, let user pick In and out of branch and satellite offices
-        satellite_offices = Branch.get_satellite_offices()
-        branch_offices = Branch.get_branch_offices()
 
-        if request.user.get_username != 'warehousemanager': #Don't know if this will work yo
+        package_instance = Package()
+        statuses = package_instance.get_statuses() #In template -> Check If Package is in office. If it is, let user pick In and out of branch and satellite offices
+
+        branch_instance = Branch()
+        satellite_offices = branch_instance.get_satellite_offices()
+        branch_offices = branch_instance.get_branch_offices()
+
+        if User.objects.get.groups.filter(name="warehouse_manager"): # do something #Don't know if this will work yo
             context = {'packages': packages}
 
             form = request.POST
@@ -131,13 +135,13 @@ def update_package_status(request):
                 Display That shit
                 {% endif %}
                 '''
-            return render(request, 'packages/whmngr_update_package', context) #fix me
+            return render(request, 'packages/update_packages.html', context) #fix me
 
-        else:
+        elif User.objects.get.groups.filter(name="client"):
             context = {'packages': packages, 'drivers': drivers, 'statuses': statuses,
                        'satellite_offices': satellite_offices, 'branch_offices': branch_offices}
 
-            return render(request, 'packages/driver_update_package', context) #fix me
+            return render(request, 'packages/update_packages.html', context) #fix me
 
 
 def track_packages(request):
