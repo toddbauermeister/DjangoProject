@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="{% url 'packages:index' %}">Mu Logistics</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-              <ul class="nav navbar-nav">
-                {% block navlist %}
-                {% endblock %}
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
-        </nav>
-    <!--
-    Need to put nav in base
+        <meta charset="utf-8">
 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel="icon" href="../../favicon.ico">
 
-    <nav class="navbar navbar-inverse">
+        <title>Starter Template for Bootstrap</title>
+
+        {% load staticfiles %}
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+            <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script src="static/js/bootstrap.min.js"></script>
+            <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+            <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+            <script>
+              $(function(){
+                $("#table").dataTable();
+              })
+            </script>
+            <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+
+  </head>
+
+      <nav class="navbar navbar-inverse">
       <div class="container-fluid">
-
+          <!-- navbar header -->
           <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
                   <span class="icon-bar"></span>
@@ -38,91 +38,37 @@
           </div>
 
           <div class="collapse navbar-collapse" id="topNavBar">
-              <ul class="nav navbar-nav">
-                  <li class="{% block packs_active %}{% endblock %}"><a href="{% url 'packages:index' %}">
-                    <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>&nbsp;Packages </a>
-                  </li>
-                  <li class="{% block drivers_active %}{% endblock %}"><a href="{% url 'packages:track_packages' %}">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;Track Packages</a>
-                  </li>
-              </ul>
-              <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'packages:index' %}">
-                  <div class="form-group">
-                      <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
-                  </div>
-                  <button type="submit" class="btn btn-default">Search</button>
-              </form>
-              <ul class="nav navbar-nav navbar-right">
-                  <li>
-                      <a href="{% url 'packages:create_package' %}">
-                          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Package
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{% url 'packages:logout_user' %}">
-                          <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
-                      </a>
-                  </li>
-              </ul>
+
+            {% block navlist %}
+            {% endblock %}
+
           </div>
-
       </div>
-  </nav>
-
-  -->
-
-    {% block nav %}
-
-    {% endblock %}
-
-
-    {% load staticfiles %}
-    <meta charset="utf-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>Starter Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
-
-    <!-- Custom styles for this template -->
-    <link href="static/css/master_style.css" rel="stylesheet">
-
-
-  </head>
+    </nav>
 
   <body>
 
-    <br>
-    <br>
-    <br>
     {% block form %}
-
     {% endblock %}
 
     {% block content %}
-
-
     {% endblock %}
+
   </body>
+    {% load staticfiles %}
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="static/js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="static/js/bootstrap.min.js"></script>
-
-    <!-- Datatable js -->
-    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-    <script>
-      $(function(){
-        $("#table").dataTable();
-      })
-    </script>
-    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+        <!-- Datatable js -->
+        <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+        <script>
+          $(function(){
+            $("#table").dataTable();
+          })
+        </script>
+        <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
 </html>

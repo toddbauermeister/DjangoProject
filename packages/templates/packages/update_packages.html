@@ -2,6 +2,22 @@
 
 {% load staticfiles %}
 
+{% block navlist %}
+  <li class="{% block packs_active %}{% endblock %}">
+    <a href="{% url 'packages:index' %}">
+      <span class="glyphicon glyphicon-briefcase" aria-hidden="true">
+      </span>&nbsp;Packages
+    </a>
+  </li>
+
+  <li class="{% block drivers_active %}{% endblock %}">
+    <a href="{% url 'packages:track_packages' %}">
+      <span class="glyphicon glyphicon-search" aria-hidden="true">
+      </span>&nbsp;Track Packages
+    </a>
+  </li>
+{% endblock %}
+
 {% block content %}
 
 {% if packages and statuses and drivers and satellite_offices and branch_offices %}
