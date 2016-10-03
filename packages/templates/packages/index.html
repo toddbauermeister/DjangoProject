@@ -27,7 +27,7 @@
             <th>Pickup Address</th>
             <th>Destination Address</th>
             <th>Destination City</th>
-            <th></th>
+            <th>Cancel Package</th>
 
           </tr>
         </thead>
@@ -35,23 +35,19 @@
         <tbody>
           {% for package in packages %}
             <tr>
-              <th>{{package.reference_number}}</th>
-              <th>{{package.volumetric_weight}}</th>
-              <th>{{package.client_address}}</th>
-              <th>{{package.receiver_address}}</th>
-              <th>{{package.receiver_city}}</th>
-              <th>
-
-              </th>
+              <td>{{package.reference_number}}</td>
+              <td>{{package.volumetric_weight}}</td>
+              <td>{{package.client_address}}</td>
+              <td>{{package.receiver_address}}</td>
+              <td>{{package.receiver_city}}</td>
+              <td>{{package.client_city}}</td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
   </div>
-<button type="button" class="btn btn-default" aria-label="Left Align">
-                <span class="glyphicon glyphicon-align-left" aria-hidden="false"></span>
-              </button>
+
 {% endblock %}
 
 

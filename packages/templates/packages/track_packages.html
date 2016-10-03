@@ -20,6 +20,7 @@
             <th>Status</th>
             <th>Volumetric Weight</th>
             <th>Destination Address</th>
+            <th></th>
 
           </tr>
         </thead>
@@ -27,10 +28,13 @@
         <tbody>
           {% for package in packages %}
             <tr>
-              <th>{{package.reference_number}}</th>
-              <th>{{package.status}}</th>
-              <th>{{package.volumetric_weight}}</th>
-              <th>{{package.client_address}}</th>
+              <td>{{package.reference_number}}</td>
+              <td>{{package.status}}</td>
+              <td>{{package.volumetric_weight}}</td>
+              <td>{{package.client_address}}</td>
+              <td>
+                <a class="btn btn-danger" href="{/cancel_package/package.pk" role="button">Cancel</a>
+              </td>
             </tr>
           {% endfor %}
         </tbody>
